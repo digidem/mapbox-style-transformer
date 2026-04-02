@@ -403,7 +403,7 @@ describe("fixture: mapbox-proprietary.json", () => {
       source: "terrain-dem",
       exaggeration: 1.5,
     });
-    assert.deepStrictEqual(result.projection, { type: "vertical-perspective" });
+    assert.deepStrictEqual(result.projection, { type: "globe" });
   });
 
   it("transforms mapbox:// URLs to https://api.mapbox.com/", () => {

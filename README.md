@@ -102,16 +102,14 @@ Unsupported base layer properties (`slot`, `appearance`) are also removed.
 
 ### Projection
 
-| Mapbox        | MapLibre               |
-| ------------- | ---------------------- |
-| `mercator`    | `mercator`             |
-| `globe`       | `vertical-perspective` |
-| Anything else | `mercator` (fallback)  |
+| Mapbox        | MapLibre              |
+| ------------- | --------------------- |
+| `mercator`    | `mercator`            |
+| `globe`       | `globe`               |
+| Anything else | `mercator` (fallback) |
 
-String projections are normalized to objects (`{ type: "..." }`). For object
-projections, the Mapbox `name` property is replaced with `type` and Mapbox-only
-properties (like `center`, `parallels` for Albers) are preserved but may not be
-recognized by MapLibre.
+The Mapbox `name` property is replaced with `type` and Mapbox-only properties
+(like `center`, `parallels` for Albers) are removed.
 
 ### Light
 

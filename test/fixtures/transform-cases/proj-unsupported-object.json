@@ -15,8 +15,6 @@
     "sources": {},
     "layers": [],
     "projection": {
-      "center": [-96, 37.5],
-      "parallels": [29.5, 45.5],
       "type": "mercator"
     }
   }

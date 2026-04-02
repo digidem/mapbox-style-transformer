@@ -56,15 +56,14 @@ const MAPLIBRE_ROOT_PROPERTIES = new Set([
 ]);
 
 /**
- * Mapbox projection names mapped to MapLibre equivalents.
- * Unsupported projections fall back to "mercator".
- * Mapbox "globe" maps to MapLibre "vertical-perspective".
- * @type {Record<string, string>}
+ * Mapbox projection names mapped to MapLibre equivalents. Unsupported
+ * projections fall back to "mercator". Mapbox "globe" maps to MapLibre "globe"
+ * preset (transforms from globe to mercator as you zoom in).
  */
-const PROJECTION_MAP = {
+const PROJECTION_MAP = /** @type {const} */ ({
   mercator: "mercator",
-  globe: "vertical-perspective",
-};
+  globe: "globe",
+});
 
 /**
  * Transform a Mapbox GL style into a MapLibre GL compatible style.
@@ -218,12 +217,13 @@ function convertLightsToLight(lights) {
  * @returns {MaplibreStyle['projection']}
  */
 function transformProjection(projection) {
-  const { name, ...rest } = projection;
-  const type = PROJECTION_MAP[name] ?? "mercator";
-  // MapLibre ProjectionSpecification.type is PropertyValueSpecification<ProjectionDefinitionSpecification>,
-  // a complex nested type. Plain string literals like "mercator" satisfy it at runtime but TS can't verify
-  // the match through the intermediate types, so we cast the whole object.
-  return /** @type {MaplibreStyle['projection']} */ ({ ...rest, type });
+  const { name } = projection;
+  const type =
+    PROJECTION_MAP[
+      /** @type {keyof typeof PROJECTION_MAP} */
+      (name)
+    ] ?? "mercator";
+  return { type };
 }
 
 /**
