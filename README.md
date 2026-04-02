@@ -8,7 +8,7 @@ expression operators, and `mapbox://` URLs.
 ## Usage
 
 ```js
-import { mapboxToMaplibre } from "mapbox-style-transformer";
+import { mapboxToMaplibre, isMapboxStyle } from "mapbox-style-transformer";
 
 const maplibreStyle = mapboxToMaplibre(mapboxStyle);
 
@@ -18,7 +18,23 @@ const maplibreStyle = mapboxToMaplibre(mapboxStyle, {
 });
 ```
 
-The function returns a new style object; the input is not mutated.
+`mapboxToMaplibre` returns a new style object; the input is not mutated.
+
+### `isMapboxStyle(style)`
+
+A type guard that returns `true` if the style appears to be a Mapbox GL style.
+Detects `mapbox://` protocol URLs in `glyphs`, `sprite`, or source `url`
+properties, and Mapbox-only root properties (`fog`, `lights`, `imports`, etc.).
+
+```js
+if (isMapboxStyle(style)) {
+  // style is narrowed to MapboxStyle
+  style = mapboxToMaplibre(style);
+}
+```
+
+This is a heuristic — it catches most Mapbox styles but may not detect styles
+that use no `mapbox://` URLs and no Mapbox-only properties.
 
 ## What gets transformed
 

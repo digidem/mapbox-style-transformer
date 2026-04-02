@@ -18,6 +18,23 @@ import { transformLight } from "./light.js";
 import { transformExpression } from "./expressions.js";
 import { transformUrls } from "./urls.js";
 
+/** Root properties that only exist in Mapbox styles, not MapLibre */
+const MAPBOX_ONLY_ROOT_PROPERTIES = new Set([
+  "fog",
+  "lights",
+  "snow",
+  "rain",
+  "camera",
+  "color-theme",
+  "imports",
+  "schema",
+  "models",
+  "featuresets",
+  "fragment",
+  "indoor",
+  "iconsets",
+]);
+
 /** Root properties supported by MapLibre */
 const MAPLIBRE_ROOT_PROPERTIES = new Set([
   "version",
@@ -236,4 +253,51 @@ function convertFogToSky(fog) {
   return sky;
 }
 
-export { transformExpression };
+/**
+ * Check if a style is a Mapbox GL style (as opposed to a MapLibre GL style).
+ *
+ * Detects the presence of mapbox:// protocol URLs or Mapbox-only root properties.
+ * This is a heuristic — it catches most Mapbox styles but may not detect all of them.
+ *
+ * @param {MapboxStyle | MaplibreStyle} style
+ * @returns {style is MapboxStyle}
+ */
+export function isMapboxStyle(style) {
+  // Check for mapbox-only root properties
+  for (const key of Object.keys(style)) {
+    if (MAPBOX_ONLY_ROOT_PROPERTIES.has(key)) {
+      return true;
+    }
+  }
+
+  // Check for mapbox:// URLs in glyphs
+  if (
+    typeof style.glyphs === "string" &&
+    style.glyphs.startsWith("mapbox://")
+  ) {
+    return true;
+  }
+
+  // Check for mapbox:// URLs in sprite
+  if (
+    typeof style.sprite === "string" &&
+    style.sprite.startsWith("mapbox://")
+  ) {
+    return true;
+  }
+
+  // Check for mapbox:// URLs in sources
+  if (style.sources) {
+    for (const source of Object.values(style.sources)) {
+      if (
+        "url" in source &&
+        typeof source.url === "string" &&
+        source.url.startsWith("mapbox://")
+      ) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}

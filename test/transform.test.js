@@ -8,8 +8,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateStyleMin } from "@maplibre/maplibre-gl-style-spec";
 import { validate as validateMapbox } from "@mapbox/mapbox-gl-style-spec";
-import { mapboxToMaplibre, transformExpression } from "../src/index.js";
-import { hslToRgb } from "../src/expressions.js";
+import { mapboxToMaplibre } from "../src/index.js";
+import { hslToRgb, transformExpression } from "../src/expressions.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -252,7 +252,11 @@ describe("hslToRgb", () => {
     { name: "pure blue", args: [240, 1, 0.5], expected: [0, 0, 255] },
     { name: "white", args: [0, 0, 1], expected: [255, 255, 255] },
     { name: "black", args: [0, 0, 0], expected: [0, 0, 0] },
-    { name: "yellow-green (h=90)", args: [90, 1, 0.5], expected: [128, 255, 0] },
+    {
+      name: "yellow-green (h=90)",
+      args: [90, 1, 0.5],
+      expected: [128, 255, 0],
+    },
     { name: "pink (h=330)", args: [330, 1, 0.5], expected: [255, 0, 128] },
   ];
   for (const { name, args, expected } of cases) {
