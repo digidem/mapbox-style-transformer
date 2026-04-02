@@ -36,6 +36,26 @@ if (isMapboxStyle(style)) {
 This is a heuristic — it catches most Mapbox styles but may not detect styles
 that use no `mapbox://` URLs and no Mapbox-only properties.
 
+### `transformUrls(style, options?)`
+
+A lightweight alternative to `mapboxToMaplibre` that **only** converts
+`mapbox://` protocol URLs to standard HTTPS URLs, without touching layers,
+properties, or expressions. This is useful if you already know your Mapbox style
+is compatible with MapLibre — which is the case for styles created for the
+Mapbox SDK versions prior to the Mapbox/MapLibre fork.
+
+Unlike `mapboxToMaplibre`, `transformUrls` mutates the style object in place and
+is imported from a separate entrypoint (`mapbox-style-transformer/urls.js`) to
+allow URL transformation without the rest of the style transformations.
+
+```js
+import { transformUrls } from "mapbox-style-transformer/urls.js";
+
+transformUrls(style, { accessToken: "pk.your_token_here" });
+```
+
+Non-`mapbox://` URLs are left unchanged, so passing a MapLibre style is a no-op.
+
 ## What gets transformed
 
 ### URLs

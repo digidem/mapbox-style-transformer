@@ -77,7 +77,7 @@ function transformSourceUrl(uri, accessToken) {
  * Transform all mapbox:// URLs in a style object.
  * Handles glyphs, sprite (string or array), and source URLs.
  *
- * @param {import("./index.js").MapboxStyle} style
+ * @param {import("./index.js").MapboxStyle | import("./index.js").MaplibreStyle} style
  * @param {{ accessToken?: string }} [options]
  */
 export function transformUrls(style, options) {
