@@ -1,0 +1,47 @@
+{
+  "description": "converts at-interpolated expression to at",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-opacity": ["at-interpolated", 0, ["literal", [0.5, 1]]]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-opacity": ["at", 0, ["literal", [0.5, 1]]]
+        }
+      }
+    ]
+  }
+}

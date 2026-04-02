@@ -1,0 +1,63 @@
+{
+  "description": "recursively transforms hsl expressions nested inside interpolation",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10,
+            ["hsl", 0, 100, 50],
+            15,
+            ["hsl", 120, 100, 50]
+          ]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10,
+            ["rgb", 255, 0, 0],
+            15,
+            ["rgb", 0, 255, 0]
+          ]
+        }
+      }
+    ]
+  }
+}

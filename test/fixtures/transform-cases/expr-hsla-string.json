@@ -1,0 +1,47 @@
+{
+  "description": "converts hsla() color strings in paint property values to rgba()",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": "hsla(0, 100%, 50%, 0.5)"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": "rgba(255, 0, 0, 0.5)"
+        }
+      }
+    ]
+  }
+}

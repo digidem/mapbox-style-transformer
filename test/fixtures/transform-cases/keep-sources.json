@@ -1,0 +1,95 @@
+{
+  "description": "keeps all supported source types (vector, raster, raster-dem, geojson, image, video) and transforms mapbox:// URLs",
+  "input": {
+    "version": 8,
+    "sources": {
+      "vec": {
+        "type": "vector",
+        "url": "mapbox://mapbox.mapbox-streets-v8"
+      },
+      "ras": {
+        "type": "raster",
+        "tiles": ["https://example.com/{z}/{x}/{y}.png"],
+        "tileSize": 256
+      },
+      "dem": {
+        "type": "raster-dem",
+        "url": "mapbox://mapbox.mapbox-terrain-dem-v1"
+      },
+      "geo": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      },
+      "img": {
+        "type": "image",
+        "url": "https://example.com/image.png",
+        "coordinates": [
+          [0, 0],
+          [1, 0],
+          [1, 1],
+          [0, 1]
+        ]
+      },
+      "vid": {
+        "type": "video",
+        "urls": ["https://example.com/video.mp4"],
+        "coordinates": [
+          [0, 0],
+          [1, 0],
+          [1, 1],
+          [0, 1]
+        ]
+      }
+    },
+    "layers": []
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "vec": {
+        "type": "vector",
+        "url": "https://api.mapbox.com/v4/mapbox.mapbox-streets-v8.json"
+      },
+      "ras": {
+        "type": "raster",
+        "tiles": ["https://example.com/{z}/{x}/{y}.png"],
+        "tileSize": 256
+      },
+      "dem": {
+        "type": "raster-dem",
+        "url": "https://api.mapbox.com/v4/mapbox.mapbox-terrain-dem-v1.json"
+      },
+      "geo": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      },
+      "img": {
+        "type": "image",
+        "url": "https://example.com/image.png",
+        "coordinates": [
+          [0, 0],
+          [1, 0],
+          [1, 1],
+          [0, 1]
+        ]
+      },
+      "vid": {
+        "type": "video",
+        "urls": ["https://example.com/video.mp4"],
+        "coordinates": [
+          [0, 0],
+          [1, 0],
+          [1, 1],
+          [0, 1]
+        ]
+      }
+    },
+    "layers": []
+  }
+}

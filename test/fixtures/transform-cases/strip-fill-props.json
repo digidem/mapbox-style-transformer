@@ -1,0 +1,46 @@
+{
+  "description": "strips Mapbox-only fill paint properties (emissive-strength, z-offset, pattern-cross-fade)",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "f",
+        "type": "fill",
+        "source": "s",
+        "source-layer": "data",
+        "paint": {
+          "fill-color": "red",
+          "fill-emissive-strength": 1,
+          "fill-z-offset": 5,
+          "fill-pattern-cross-fade": 0.5
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "f",
+        "type": "fill",
+        "source": "s",
+        "source-layer": "data",
+        "paint": {
+          "fill-color": "red"
+        }
+      }
+    ]
+  }
+}

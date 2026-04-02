@@ -1,0 +1,17 @@
+{
+  "description": "maps mercator projection to object with type",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": { "name": "mercator" }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": {
+      "type": "mercator"
+    }
+  }
+}

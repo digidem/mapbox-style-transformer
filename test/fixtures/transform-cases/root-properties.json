@@ -1,0 +1,41 @@
+{
+  "description": "preserves supported root properties and transforms mapbox:// sprite and glyph URLs",
+  "input": {
+    "version": 8,
+    "name": "Test",
+    "metadata": {
+      "custom": true
+    },
+    "center": [0, 0],
+    "zoom": 5,
+    "bearing": 45,
+    "pitch": 30,
+    "sources": {},
+    "layers": [],
+    "sprite": "mapbox://sprites/mapbox/streets-v12",
+    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+    "transition": {
+      "duration": 300,
+      "delay": 0
+    }
+  },
+  "expected": {
+    "version": 8,
+    "name": "Test",
+    "metadata": {
+      "custom": true
+    },
+    "center": [0, 0],
+    "zoom": 5,
+    "bearing": 45,
+    "pitch": 30,
+    "sources": {},
+    "layers": [],
+    "sprite": "https://api.mapbox.com/styles/v1/mapbox/streets-v12/sprite",
+    "glyphs": "https://api.mapbox.com/fonts/v1/mapbox/{fontstack}/{range}.pbf",
+    "transition": {
+      "duration": 300,
+      "delay": 0
+    }
+  }
+}

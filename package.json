@@ -1,0 +1,35 @@
+{
+  "name": "mapbox-style-transformer",
+  "version": "1.0.0",
+  "description": "Transform Mapbox GL styles to MapLibre GL styles",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "test": "c8 node --test",
+    "test:ci": "c8 --reporter=lcov node --test",
+    "format": "prettier --write .",
+    "build": "tsc -p tsconfig.build.json",
+    "types": "tsc",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@mapbox/mapbox-gl-style-spec": "^14.20.0",
+    "@maplibre/maplibre-gl-style-spec": "^24.7.0"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^25.5.0",
+    "c8": "^11.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  }
+}

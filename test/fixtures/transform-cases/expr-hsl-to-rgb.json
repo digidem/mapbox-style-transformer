@@ -1,0 +1,47 @@
+{
+  "description": "converts hsl expression to rgb when all arguments are numeric literals",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": ["hsl", 0, 100, 50]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": []
+        }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": ["rgb", 255, 0, 0]
+        }
+      }
+    ]
+  }
+}

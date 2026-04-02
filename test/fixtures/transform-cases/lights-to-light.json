@@ -1,0 +1,37 @@
+{
+  "description": "converts Mapbox lights array with directional light to single MapLibre light object",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "lights": [
+      {
+        "id": "ambient",
+        "type": "ambient",
+        "properties": {
+          "color": "white",
+          "intensity": 0.2
+        }
+      },
+      {
+        "id": "sun",
+        "type": "directional",
+        "properties": {
+          "color": "#ffe0b2",
+          "intensity": 0.8,
+          "direction": [210, 30]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "light": {
+      "color": "#ffe0b2",
+      "intensity": 0.8,
+      "position": [1.15, 210, 30]
+    }
+  }
+}

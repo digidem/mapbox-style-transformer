@@ -1,0 +1,50 @@
+{
+  "description": "strips unsupported base layer properties (slot, appearance)",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "f",
+        "type": "fill",
+        "source": "s",
+        "source-layer": "data",
+        "slot": "bottom",
+        "appearance": [
+          {
+            "condition": true,
+            "properties": {}
+          }
+        ],
+        "paint": {
+          "fill-color": "red"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "f",
+        "type": "fill",
+        "source": "s",
+        "source-layer": "data",
+        "paint": {
+          "fill-color": "red"
+        }
+      }
+    ]
+  }
+}

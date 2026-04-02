@@ -1,0 +1,27 @@
+{
+  "description": "leaves non-mapbox:// URLs unchanged",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "https://example.com/tiles.json"
+      }
+    },
+    "layers": [],
+    "sprite": "https://example.com/sprite",
+    "glyphs": "https://example.com/fonts/{fontstack}/{range}.pbf"
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "https://example.com/tiles.json"
+      }
+    },
+    "layers": [],
+    "sprite": "https://example.com/sprite",
+    "glyphs": "https://example.com/fonts/{fontstack}/{range}.pbf"
+  }
+}

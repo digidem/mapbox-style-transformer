@@ -1,0 +1,49 @@
+{
+  "description": "strips Mapbox-only line paint properties (border-color, border-width, emissive-strength, trim-offset)",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "line",
+        "source": "s",
+        "source-layer": "data",
+        "paint": {
+          "line-color": "blue",
+          "line-width": 2,
+          "line-border-color": "red",
+          "line-border-width": 1,
+          "line-emissive-strength": 0.5,
+          "line-trim-offset": [0, 1]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "line",
+        "source": "s",
+        "source-layer": "data",
+        "paint": {
+          "line-color": "blue",
+          "line-width": 2
+        }
+      }
+    ]
+  }
+}

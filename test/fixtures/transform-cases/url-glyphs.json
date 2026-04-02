@@ -1,0 +1,15 @@
+{
+  "description": "transforms mapbox:// glyphs URL to https://api.mapbox.com/ URL",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf"
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "glyphs": "https://api.mapbox.com/fonts/v1/mapbox/{fontstack}/{range}.pbf"
+  }
+}

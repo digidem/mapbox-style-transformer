@@ -1,0 +1,13 @@
+{
+  "description": "passes through a minimal valid style unchanged",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": []
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": []
+  }
+}

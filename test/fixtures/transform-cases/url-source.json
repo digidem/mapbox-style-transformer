@@ -1,0 +1,23 @@
+{
+  "description": "transforms mapbox:// source URL to https://api.mapbox.com/v4/ TileJSON URL",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "mapbox://mapbox.mapbox-streets-v8"
+      }
+    },
+    "layers": []
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "https://api.mapbox.com/v4/mapbox.mapbox-streets-v8.json"
+      }
+    },
+    "layers": []
+  }
+}

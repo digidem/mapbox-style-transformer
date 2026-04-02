@@ -1,0 +1,41 @@
+{
+  "description": "converts hsla expression with dynamic args to rgba passthrough",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": { "type": "FeatureCollection", "features": [] }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": ["hsla", ["get", "hue"], 100, 50, 0.8]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": { "type": "FeatureCollection", "features": [] }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": ["rgba", ["get", "hue"], 100, 50, 0.8]
+        }
+      }
+    ]
+  }
+}

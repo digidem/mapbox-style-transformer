@@ -1,0 +1,45 @@
+{
+  "description": "recurses into object property values without stops (identity function with HSL default)",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": { "type": "FeatureCollection", "features": [] }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": {
+            "property": "color",
+            "type": "identity",
+            "default": "hsl(0, 100%, 50%)"
+          }
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": { "type": "FeatureCollection", "features": [] }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": ["to-color", ["get", "color"], "rgb(255, 0, 0)"]
+        }
+      }
+    ]
+  }
+}

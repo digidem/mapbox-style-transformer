@@ -1,0 +1,22 @@
+{
+  "description": "does not overwrite existing sky property with fog conversion",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "sky": {
+      "sky-color": "blue"
+    },
+    "fog": {
+      "color": "#e0e0e0"
+    }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "sky": {
+      "sky-color": "blue"
+    }
+  }
+}

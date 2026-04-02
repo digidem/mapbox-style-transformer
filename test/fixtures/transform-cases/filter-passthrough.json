@@ -1,0 +1,53 @@
+{
+  "description": "preserves supported filter expressions through transformation",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "f",
+        "type": "fill",
+        "source": "s",
+        "source-layer": "data",
+        "filter": [
+          "all",
+          ["==", ["geometry-type"], "Polygon"],
+          [">", ["get", "area"], 1000]
+        ],
+        "paint": {
+          "fill-color": "red"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "layers": [
+      {
+        "id": "f",
+        "type": "fill",
+        "source": "s",
+        "source-layer": "data",
+        "filter": [
+          "all",
+          ["==", ["geometry-type"], "Polygon"],
+          [">", ["get", "area"], 1000]
+        ],
+        "paint": {
+          "fill-color": "red"
+        }
+      }
+    ]
+  }
+}

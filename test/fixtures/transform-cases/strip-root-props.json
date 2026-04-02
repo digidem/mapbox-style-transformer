@@ -1,0 +1,42 @@
+{
+  "description": "strips Mapbox-only root properties (snow, rain, camera, color-theme, imports, schema, models, featuresets, fragment, indoor, iconsets)",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "fog": {
+      "range": [1, 10],
+      "color": "white"
+    },
+    "snow": {
+      "intensity": 0.5
+    },
+    "rain": {
+      "intensity": 0.5
+    },
+    "camera": {
+      "camera-projection": "perspective"
+    },
+    "color-theme": {},
+    "imports": [
+      {
+        "id": "base",
+        "url": "mapbox://styles/mapbox/standard"
+      }
+    ],
+    "schema": {},
+    "models": {},
+    "featuresets": {},
+    "fragment": true,
+    "indoor": {},
+    "iconsets": {}
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "sky": {
+      "fog-color": "white"
+    }
+  }
+}

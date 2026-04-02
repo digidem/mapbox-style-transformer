@@ -1,0 +1,15 @@
+{
+  "description": "transforms mapbox:// sprite URL to https://api.mapbox.com/ URL",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "sprite": "mapbox://sprites/mapbox/streets-v12"
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "sprite": "https://api.mapbox.com/styles/v1/mapbox/streets-v12/sprite"
+  }
+}

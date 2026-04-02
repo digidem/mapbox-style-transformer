@@ -1,0 +1,17 @@
+{
+  "description": "falls back unsupported projection (naturalEarth) to mercator",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": { "name": "naturalEarth" }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": {
+      "type": "mercator"
+    }
+  }
+}

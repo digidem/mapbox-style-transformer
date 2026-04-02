@@ -1,0 +1,25 @@
+{
+  "description": "passes through compatible light properties (anchor, color, intensity, position)",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "light": {
+      "anchor": "viewport",
+      "color": "white",
+      "intensity": 0.5,
+      "position": [1.15, 210, 30]
+    }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "light": {
+      "anchor": "viewport",
+      "color": "white",
+      "intensity": 0.5,
+      "position": [1.15, 210, 30]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "description": "ignores lights array with no directional or ambient light",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "lights": [
+      { "id": "flat", "type": "flat", "properties": {} }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": []
+  }
+}

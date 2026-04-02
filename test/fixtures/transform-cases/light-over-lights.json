@@ -1,0 +1,31 @@
+{
+  "description": "prefers existing light property over lights array",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "light": {
+      "color": "red",
+      "intensity": 1
+    },
+    "lights": [
+      {
+        "id": "sun",
+        "type": "directional",
+        "properties": {
+          "color": "blue",
+          "intensity": 0.5
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "light": {
+      "color": "red",
+      "intensity": 1
+    }
+  }
+}

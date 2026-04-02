@@ -1,0 +1,17 @@
+{
+  "description": "maps globe projection to vertical-perspective",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": { "name": "globe" }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": {
+      "type": "vertical-perspective"
+    }
+  }
+}

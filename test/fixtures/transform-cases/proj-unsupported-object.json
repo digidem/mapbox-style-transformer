@@ -1,0 +1,23 @@
+{
+  "description": "falls back unsupported object projection (albers) to mercator, drops name, keeps other properties",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": {
+      "name": "albers",
+      "center": [-96, 37.5],
+      "parallels": [29.5, 45.5]
+    }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "projection": {
+      "center": [-96, 37.5],
+      "parallels": [29.5, 45.5],
+      "type": "mercator"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "description": "ignores fog with no mappable properties",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "fog": {
+      "range": [0.5, 10],
+      "star-intensity": 0.15
+    }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": []
+  }
+}

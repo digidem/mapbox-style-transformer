@@ -1,0 +1,28 @@
+{
+  "description": "appends access_token query parameter to transformed mapbox:// URLs when provided",
+  "options": { "accessToken": "pk.test123" },
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "mapbox://mapbox.mapbox-streets-v8"
+      }
+    },
+    "layers": [],
+    "sprite": "mapbox://sprites/mapbox/streets-v12",
+    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf"
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "https://api.mapbox.com/v4/mapbox.mapbox-streets-v8.json?access_token=pk.test123"
+      }
+    },
+    "layers": [],
+    "sprite": "https://api.mapbox.com/styles/v1/mapbox/streets-v12/sprite?access_token=pk.test123",
+    "glyphs": "https://api.mapbox.com/fonts/v1/mapbox/{fontstack}/{range}.pbf?access_token=pk.test123"
+  }
+}

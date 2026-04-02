@@ -1,0 +1,57 @@
+{
+  "description": "strips Mapbox-only symbol paint and layout properties (emissive-strength, occlusion, z-elevate, size-scale-range)",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "glyphs": "https://example.com/fonts/{fontstack}/{range}.pbf",
+    "layers": [
+      {
+        "id": "sym",
+        "type": "symbol",
+        "source": "s",
+        "source-layer": "data",
+        "paint": {
+          "text-color": "#000",
+          "text-emissive-strength": 1,
+          "icon-occlusion-opacity": 0.5,
+          "icon-color-saturation": 0.8,
+          "symbol-z-offset": 10
+        },
+        "layout": {
+          "text-field": "{name}",
+          "symbol-z-elevate": true,
+          "icon-size-scale-range": [0.5, 1.5]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "vector",
+        "url": "test"
+      }
+    },
+    "glyphs": "https://example.com/fonts/{fontstack}/{range}.pbf",
+    "layers": [
+      {
+        "id": "sym",
+        "type": "symbol",
+        "source": "s",
+        "source-layer": "data",
+        "paint": {
+          "text-color": "#000"
+        },
+        "layout": {
+          "text-field": ["to-string", ["get", "name"]]
+        }
+      }
+    ]
+  }
+}

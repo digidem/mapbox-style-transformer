@@ -1,0 +1,62 @@
+{
+  "description": "removes unsupported layer types (model, raster-particle, slot, clip, sky) and keeps supported ones",
+  "input": {
+    "version": 8,
+    "sources": {
+      "v": { "type": "vector", "url": "test" },
+      "m": { "type": "model", "url": "test" },
+      "ra": { "type": "raster-array", "url": "test", "tileSize": 256 }
+    },
+    "layers": [
+      {
+        "id": "mdl",
+        "type": "model",
+        "source": "m"
+      },
+      {
+        "id": "rp",
+        "type": "raster-particle",
+        "source": "ra"
+      },
+      {
+        "id": "sl",
+        "type": "slot"
+      },
+      {
+        "id": "cl",
+        "type": "clip",
+        "source": "v",
+        "source-layer": "data"
+      },
+      {
+        "id": "sk",
+        "type": "sky",
+        "paint": {
+          "sky-type": "atmosphere"
+        }
+      },
+      {
+        "id": "bg",
+        "type": "background",
+        "paint": {
+          "background-color": "#fff"
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "v": { "type": "vector", "url": "test" }
+    },
+    "layers": [
+      {
+        "id": "bg",
+        "type": "background",
+        "paint": {
+          "background-color": "#fff"
+        }
+      }
+    ]
+  }
+}

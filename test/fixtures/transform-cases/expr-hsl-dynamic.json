@@ -1,0 +1,41 @@
+{
+  "description": "converts hsl expression with dynamic args to rgb passthrough",
+  "input": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": { "type": "FeatureCollection", "features": [] }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": ["hsl", ["get", "hue"], 100, 50]
+        }
+      }
+    ]
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "s": {
+        "type": "geojson",
+        "data": { "type": "FeatureCollection", "features": [] }
+      }
+    },
+    "layers": [
+      {
+        "id": "l",
+        "type": "fill",
+        "source": "s",
+        "paint": {
+          "fill-color": ["rgb", ["get", "hue"], 100, 50]
+        }
+      }
+    ]
+  }
+}

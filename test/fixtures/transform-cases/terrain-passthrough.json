@@ -1,0 +1,31 @@
+{
+  "description": "passes through terrain configuration (source, exaggeration) unchanged",
+  "input": {
+    "version": 8,
+    "sources": {
+      "dem": {
+        "type": "raster-dem",
+        "url": "mapbox://mapbox.mapbox-terrain-dem-v1"
+      }
+    },
+    "layers": [],
+    "terrain": {
+      "source": "dem",
+      "exaggeration": 1.5
+    }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {
+      "dem": {
+        "type": "raster-dem",
+        "url": "https://api.mapbox.com/v4/mapbox.mapbox-terrain-dem-v1.json"
+      }
+    },
+    "layers": [],
+    "terrain": {
+      "source": "dem",
+      "exaggeration": 1.5
+    }
+  }
+}

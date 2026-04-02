@@ -1,0 +1,23 @@
+{
+  "description": "converts Mapbox fog properties (color, high-color, horizon-blend) to MapLibre sky",
+  "input": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "fog": {
+      "color": "#e0e0e0",
+      "high-color": "#87ceeb",
+      "horizon-blend": 0.1
+    }
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": [],
+    "sky": {
+      "fog-color": "#e0e0e0",
+      "sky-color": "#87ceeb",
+      "sky-horizon-blend": 0.1
+    }
+  }
+}

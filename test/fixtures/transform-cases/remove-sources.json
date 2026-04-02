@@ -1,0 +1,22 @@
+{
+  "description": "removes unsupported source types (raster-array, model)",
+  "input": {
+    "version": 8,
+    "sources": {
+      "arr": {
+        "type": "raster-array",
+        "url": "mapbox://example"
+      },
+      "mdl": {
+        "type": "model",
+        "url": "mapbox://example"
+      }
+    },
+    "layers": []
+  },
+  "expected": {
+    "version": 8,
+    "sources": {},
+    "layers": []
+  }
+}

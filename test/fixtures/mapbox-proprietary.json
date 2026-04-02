@@ -1,0 +1,395 @@
+{
+  "version": 8,
+  "name": "Mapbox Proprietary Features Test",
+  "fragment": true,
+  "metadata": { "mapbox:type": "template" },
+  "center": [-73.9749, 40.7736],
+  "zoom": 12,
+  "bearing": 0,
+  "pitch": 45,
+  "schema": {
+    "showLabels": { "type": "boolean", "default": true },
+    "labelColor": { "type": "color", "default": "#333" }
+  },
+  "imports": [{ "id": "base", "url": "mapbox://styles/mapbox/standard" }],
+  "sources": {
+    "streets": {
+      "type": "vector",
+      "url": "mapbox://mapbox.mapbox-streets-v8"
+    },
+    "terrain-dem": {
+      "type": "raster-dem",
+      "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
+      "tileSize": 512
+    },
+    "satellite": {
+      "type": "raster",
+      "url": "mapbox://mapbox.satellite",
+      "tileSize": 256
+    },
+    "wind-data": {
+      "type": "raster-array",
+      "url": "mapbox://mapbox.wind"
+    },
+    "buildings-3d": {
+      "type": "model",
+      "url": "mapbox://mapbox.3d-buildings"
+    }
+  },
+  "sprite": "mapbox://sprites/mapbox/streets-v12",
+  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "lights": [
+    {
+      "id": "ambient",
+      "type": "ambient",
+      "properties": { "color": "white", "intensity": 0.3 }
+    },
+    {
+      "id": "sun",
+      "type": "directional",
+      "properties": {
+        "color": "#ffeedd",
+        "intensity": 0.7,
+        "direction": [200, 40],
+        "cast-shadows": true,
+        "shadow-intensity": 0.5
+      }
+    }
+  ],
+  "fog": {
+    "range": [1, 10],
+    "color": "#e8e8e8",
+    "high-color": "#87ceeb",
+    "space-color": "#000022",
+    "horizon-blend": 0.05,
+    "star-intensity": 0.1,
+    "vertical-range": [0, 100]
+  },
+  "terrain": {
+    "source": "terrain-dem",
+    "exaggeration": 1.5
+  },
+  "projection": {
+    "name": "globe"
+  },
+  "transition": {
+    "duration": 300,
+    "delay": 0
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#f0f0f0",
+        "background-emissive-strength": 0.5,
+        "background-pitch-alignment": "viewport"
+      }
+    },
+    {
+      "id": "satellite-raster",
+      "type": "raster",
+      "source": "satellite",
+      "paint": {
+        "raster-opacity": 0.5,
+        "raster-saturation": -0.2,
+        "raster-brightness-min": 0.1,
+        "raster-brightness-max": 0.9,
+        "raster-emissive-strength": 0.3,
+        "raster-color": [
+          "interpolate",
+          ["linear"],
+          ["raster-value"],
+          0,
+          "blue",
+          1,
+          "red"
+        ],
+        "raster-color-mix": [1, 0, 0, 0],
+        "raster-color-range": [0, 1]
+      }
+    },
+    {
+      "id": "hillshade-layer",
+      "type": "hillshade",
+      "source": "terrain-dem",
+      "paint": {
+        "hillshade-exaggeration": 0.5,
+        "hillshade-shadow-color": "#000000",
+        "hillshade-highlight-color": "#ffffff",
+        "hillshade-emissive-strength": 0.3
+      }
+    },
+    {
+      "id": "land",
+      "type": "fill",
+      "source": "streets",
+      "source-layer": "land",
+      "paint": {
+        "fill-color": "#e0e0e0",
+        "fill-emissive-strength": 0.3,
+        "fill-z-offset": 0
+      },
+      "layout": {
+        "fill-elevation-reference": "sea"
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "streets",
+      "source-layer": "water",
+      "paint": {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          5,
+          "hsl(205, 50, 60)",
+          15,
+          "hsl(205, 70, 50)"
+        ],
+        "fill-opacity": 0.8
+      }
+    },
+    {
+      "id": "roads",
+      "type": "line",
+      "source": "streets",
+      "source-layer": "road",
+      "filter": [
+        "all",
+        ["==", ["geometry-type"], "LineString"],
+        ["!=", ["get", "class"], "ferry"]
+      ],
+      "paint": {
+        "line-color": [
+          "match",
+          ["get", "class"],
+          "motorway",
+          "#ff8c00",
+          "trunk",
+          "#ffa500",
+          "primary",
+          "#ffcc00",
+          "#cccccc"
+        ],
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.5],
+          ["zoom"],
+          5,
+          0.5,
+          18,
+          20
+        ],
+        "line-opacity": 1,
+        "line-border-color": "#888888",
+        "line-border-width": 1,
+        "line-emissive-strength": 0.5,
+        "line-occlusion-opacity": 0.3,
+        "line-trim-offset": [0, 1]
+      },
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round",
+        "line-elevation-reference": "sea",
+        "line-z-offset": 0
+      }
+    },
+    {
+      "id": "buildings-fill",
+      "type": "fill-extrusion",
+      "source": "streets",
+      "source-layer": "building",
+      "minzoom": 14,
+      "paint": {
+        "fill-extrusion-color": "#aaaaaa",
+        "fill-extrusion-height": ["get", "height"],
+        "fill-extrusion-base": ["get", "min_height"],
+        "fill-extrusion-opacity": 0.7,
+        "fill-extrusion-vertical-gradient": true,
+        "fill-extrusion-ambient-occlusion-intensity": 0.5,
+        "fill-extrusion-ambient-occlusion-radius": 3,
+        "fill-extrusion-flood-light-color": "#ffe0b2",
+        "fill-extrusion-flood-light-intensity": 0.3,
+        "fill-extrusion-cast-shadows": true,
+        "fill-extrusion-emissive-strength": 0.2,
+        "fill-extrusion-rounded-roof": true
+      },
+      "layout": {
+        "fill-extrusion-edge-radius": 0.5,
+        "source-max-zoom": 16
+      }
+    },
+    {
+      "id": "buildings-procedural",
+      "type": "building",
+      "source": "streets",
+      "source-layer": "building",
+      "minzoom": 15,
+      "paint": {
+        "building-color": "#cccccc",
+        "building-opacity": 0.9,
+        "building-emissive-strength": 0.4,
+        "building-ambient-occlusion-intensity": 0.5,
+        "building-flood-light-color": "#ffd700"
+      },
+      "layout": {
+        "visibility": "visible",
+        "building-height": ["get", "height"],
+        "building-base": ["get", "min_height"],
+        "building-roof-shape": "flat",
+        "building-facade": "generic"
+      }
+    },
+    {
+      "id": "labels",
+      "type": "symbol",
+      "source": "streets",
+      "source-layer": "place_label",
+      "filter": [
+        "all",
+        ["==", ["geometry-type"], "Point"],
+        [">", ["get", "symbolrank"], 0]
+      ],
+      "layout": {
+        "text-field": [
+          "coalesce",
+          ["config", "labelField"],
+          ["get", "name_en"],
+          ["get", "name"]
+        ],
+        "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 8, 10, 16, 24],
+        "icon-image": [
+          "coalesce",
+          ["image", ["get", "maki"]],
+          ["image", "marker-15"]
+        ],
+        "symbol-z-elevate": true,
+        "icon-size-scale-range": [0.5, 1.5],
+        "symbol-elevation-reference": "sea"
+      },
+      "paint": {
+        "text-color": [
+          "case",
+          ["config", "showLabels"],
+          ["config", "labelColor"],
+          ["has", "population"],
+          [
+            "interpolate",
+            ["linear"],
+            ["get", "population"],
+            0,
+            "#666",
+            1000000,
+            "#000"
+          ],
+          "#333"
+        ],
+        "text-halo-color": "rgba(255,255,255,0.9)",
+        "text-halo-width": 1.5,
+        "text-emissive-strength": 1,
+        "text-occlusion-opacity": 0.5,
+        "icon-emissive-strength": 0.8,
+        "icon-color-saturation": 0.5,
+        "icon-color-brightness-min": 0.2,
+        "icon-color-brightness-max": 0.8,
+        "icon-color-contrast": 0.3
+      }
+    },
+    {
+      "id": "heatmap-layer",
+      "type": "heatmap",
+      "source": "streets",
+      "source-layer": "poi_label",
+      "maxzoom": 15,
+      "paint": {
+        "heatmap-weight": [
+          "interpolate",
+          ["linear"],
+          ["get", "rank"],
+          0,
+          0,
+          10,
+          1
+        ],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 5, 1, 15, 3],
+        "heatmap-color": [
+          "interpolate",
+          ["linear"],
+          ["heatmap-density"],
+          0,
+          "rgba(0,0,255,0)",
+          0.2,
+          "royalblue",
+          0.4,
+          "cyan",
+          0.6,
+          "lime",
+          0.8,
+          "yellow",
+          1,
+          "red"
+        ],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 5, 2, 15, 20],
+        "heatmap-opacity": 0.8
+      }
+    },
+    {
+      "id": "sky-atmosphere",
+      "type": "sky",
+      "paint": {
+        "sky-type": "atmosphere",
+        "sky-atmosphere-sun": [0, 0],
+        "sky-atmosphere-sun-intensity": 15,
+        "sky-atmosphere-halo-color": "rgba(255,255,255,0.5)",
+        "sky-atmosphere-color": "rgba(135,206,235,1)",
+        "sky-opacity": 1
+      }
+    },
+    {
+      "id": "wind-particles",
+      "type": "raster-particle",
+      "source": "wind-data",
+      "paint": {
+        "raster-particle-color": [
+          "interpolate",
+          ["linear"],
+          ["raster-particle-speed"],
+          0,
+          "blue",
+          1,
+          "red"
+        ],
+        "raster-particle-speed-factor": 0.5,
+        "raster-particle-count": 1024
+      }
+    },
+    {
+      "id": "3d-models",
+      "type": "model",
+      "source": "buildings-3d",
+      "paint": {
+        "model-color": "#ffffff",
+        "model-opacity": 0.9,
+        "model-scale": [1, 1, 1]
+      },
+      "layout": {
+        "model-id": ["get", "model"]
+      }
+    },
+    {
+      "id": "clip-layer",
+      "type": "clip",
+      "layout": {
+        "clip-layer-types": ["model", "symbol"]
+      }
+    },
+    {
+      "id": "bottom-slot",
+      "type": "slot"
+    }
+  ]
+}
