@@ -79,18 +79,24 @@ function transformSourceUrl(uri, accessToken) {
  *
  * @param {import("./index.js").MapboxStyle | import("./index.js").MaplibreStyle} style
  * @param {{ accessToken?: string }} [options]
+ *
+ * @returns Boolean indicating if changes to `style` were made.
  */
 export function transformUrls(style, options) {
   const token = options?.accessToken;
 
+  let madeChanges = false;
+
   // Transform glyphs
   if (typeof style.glyphs === "string" && isMapboxURI(style.glyphs)) {
     style.glyphs = transformGlyphsUrl(style.glyphs, token);
+    madeChanges = true;
   }
 
   // Transform sprite — can be a string or array of { id, url }
   if (typeof style.sprite === "string" && isMapboxURI(style.sprite)) {
     style.sprite = transformSpriteUrl(style.sprite, token);
+    madeChanges = true;
   }
 
   // Transform source URLs
@@ -103,7 +109,10 @@ export function transformUrls(style, options) {
         isMapboxURI(source.url)
       ) {
         source.url = transformSourceUrl(source.url, token);
+        madeChanges = true;
       }
     }
   }
+
+  return madeChanges;
 }
