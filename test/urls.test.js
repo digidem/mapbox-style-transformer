@@ -18,7 +18,9 @@ describe("transformUrls", () => {
       layers: [],
     };
     const original = JSON.parse(JSON.stringify(style));
-    transformUrls(style);
+    const madeChanges = transformUrls(style);
+
+    assert.strictEqual(madeChanges);
     assert.deepStrictEqual(style, original);
   });
 });
